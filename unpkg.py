@@ -73,7 +73,7 @@ def run(version):
     #for i in paths["files"]:
     #    u=url+version+i
     #    download(u,version+'/'+i)
-    gevent.joinall([gevent.spawn(download,url+version+i,version+'/'+i) for x in paths["files"]])
+    gevent.joinall([gevent.spawn(download,url+version+i,version+'/'+i) for i in paths["files"]])
     shutil.make_archive(version,"zip",version)
     rm(version)
 
@@ -97,7 +97,7 @@ def rm(version):
             pass
             
 if __name__=='__main__':
-    name=sys.args[3]
+    name=sys.argv[2]
     pos=name.rfind('@')
     mod=name[:pos]
     version=name[pos+1:]
@@ -109,7 +109,7 @@ if __name__=='__main__':
         version=mod+'@'+versions[-1]
     else:
         version=mod+'@'+version
-    if sys.args[2]=='rm':
+    if sys.argv[1]=='rm':
         rm(version)
     else:
         run(version)
