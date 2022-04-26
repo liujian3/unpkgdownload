@@ -1,3 +1,5 @@
+from gevent import monkey; monkey.patch_all()
+import gevent
 import requests,re,os,time,shutil
 import sys
 url="https://unpkg.com/"
@@ -67,9 +69,11 @@ def run(version):
     print("版本:",version)
     paths=getPaths(version) 
     makeDirs(paths["folders"],version)
-    for i in paths["files"]:
-        u=url+version+i
-        download(u,version+'/'+i)
+    
+    #for i in paths["files"]:
+    #    u=url+version+i
+    #    download(u,version+'/'+i)
+    gevent.joinall([gevent.spawn(download,url+version+i,version+'/'+i) for x in paths["files"]])
     shutil.make_archive(version,"zip",version)
     rm(version)
 
