@@ -97,7 +97,6 @@ def rm(version):
             pass
             
 if __name__=='__main__':
-    global url 
     name=sys.args[3]
     pos=name.rfind('@')
     mod=name[:pos]
