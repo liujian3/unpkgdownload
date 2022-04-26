@@ -1,7 +1,7 @@
 from gevent import monkey; monkey.patch_all()
 import gevent
 import requests,re,os,time,shutil
-import sys
+import sys,uuid
 url="https://unpkg.com/"
 headers={ 'Accept-Language': 'zh-CN,zh;q=0.8',
             'Content-Type': 'text/html;Charset=utf-8',
